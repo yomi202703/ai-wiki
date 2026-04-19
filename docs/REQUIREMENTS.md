@@ -1,6 +1,8 @@
-# ai-wiki 要件定義書 (draft v0)
+# ai-wiki 要件定義書 (v1)
 
-_2026-04-19 起草。Step C の集約。mcp-study v2 継承 + Karpathy LLM Wiki パターン融合を目指す._
+_v0: 2026-04-19 起草 (Step C 集約)。
+v1: 2026-04-19 同日 D1-D7 決定確定。
+mcp-study v2 継承 + Karpathy LLM Wiki パターン融合を目指す._
 
 ---
 
@@ -177,48 +179,25 @@ pending の Core 5 + Adjacent 5 を順次 ingest:
 
 ---
 
-## 6. 開放された決定事項 (D1-D7)
+## 6. 確定した決定事項 (D1-D7、2026-04-19 closed)
 
-### D1: vault location
-- a) `~/ai-wiki/` (Obsidian 互換重視、clean)
-- b) `~/Projects/ai-wiki/`
-- c) `~/Projects/mcp-study/data/` 相乗り
-- **推奨: a**
+| # | 決定事項 | 確定 | 備考 |
+|---|---|---|---|
+| D1 | Vault location | **`~/ai-wiki/`** (Obsidian 互換、clean) | 既存 Projects/ 汚染なし |
+| D2 | 既存 mcp-study data | **sources のみ移行、maps は Karpathy 式で再構築** | 既存 tree は哲学非互換、sources は資産 |
+| D3 | ai-digest 既存 Run 1-6 | **新規 Run から順次 ingest** | 過去 Run は noise 混入リスク、clean start |
+| D4 | Skill / vault 命名 | **skill: `/wiki-*`、vault: `~/ai-wiki/`** | AI 専用を明示、後で `urban-wiki` 等追加可 |
+| D5 | 初期 scope | **AI 専用 start、後から domain 別 vault 追加可能設計** | premature abstraction 回避 |
+| D6 | Pillars 更新頻度 | **`/wiki-ingest` 毎に自動再計算** | 常に最新、計算コスト小 |
+| D7 | Drill 対象 | **両方 option (default: map、`*` 指定で全 concepts)** | v2 互換 + emergent 両立 |
 
-### D2: 既存 mcp-study data の取り扱い
-- a) `data/sources/*` と `data/maps/ai/*` 全移行 (継承)
-- b) 空から (clean slate)
-- c) sources のみ移行、maps は Karpathy 式再構築
-- **推奨: c**
+### 派生した含意
 
-### D3: ai-digest 既存 Run 1-6 の取り扱い
-- a) 一括 ingest seed として投入
-- b) 新規 Run から順次
-- c) user 手動のみ
-- **推奨: b**
-
-### D4: skill 名と vault の関係
-- a) skill: `/wiki-*`, vault: `~/ai-wiki/` (AI 専用明示)
-- b) skill: `/wiki-*`, vault: `~/wiki/` (domain agnostic)
-- c) skill: `/study-*`, vault: `~/study-vault/` (mcp-study 継承)
-- **推奨: a**
-
-### D5: 初期 scope の domain 制限
-- a) AI 専用、後から domain 別 vault 可能設計
-- b) 最初から domain 切替機構付き
-- **推奨: a**
-
-### D6: Pillars 更新頻度
-- a) `/wiki-ingest` 毎に再計算 (常に最新)
-- b) `/wiki-pillars` 実行時のみ
-- c) 週次 auto
-- **推奨: a**
-
-### D7: Drill 対象
-- a) `maps/*.md` の tree のみ (v2 compat)
-- b) `concepts/*.md` 全 page (emergent)
-- c) 両方 option (default map、`*` で全 concepts)
-- **推奨: c**
+- **vault root = `~/ai-wiki/`** は **Obsidian 本体で直接開ける**。user が手動編集 → skill が respect
+- **既存 mcp-study の `data/sources/AI の概要と分類.md` など** → `~/ai-wiki/sources/` にコピー (rename 規約は SPEC で定義)
+- **既存 `data/maps/ai/01-04.md`** → 参考用に保全、skill は使用しない (Karpathy 再構築路線)
+- **domain 切替は後付け**: 将来 `WIKI_ROOT` env で切替、または subdir `~/ai-wiki/urban/` 等の構造拡張で対応
+- **drill default が map 指定**: `/wiki-drill maps/ai-root.md` 等、`/wiki-drill *` で vault 全体 round-robin
 
 ---
 
@@ -260,4 +239,4 @@ pending の Core 5 + Adjacent 5 を順次 ingest:
 
 ---
 
-_次更新: D1-D7 user 決定後、SPEC.md 起草と合わせて本ファイル §6 を closed decisions 化._
+_次更新: SPEC.md v0 起草完了時に §8 stage の依存関係更新。実装中に要件再考要あれば v2 として記録._
