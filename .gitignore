@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Vault local data (separate from repo)
+data/
+*.local
+
+# Obsidian workspace files (if any stray vault ends up here)
+.obsidian/
+.trash/
+
+# Build / distribution
+dist/
+build/
+
+# Env
+.env
+.env.local
